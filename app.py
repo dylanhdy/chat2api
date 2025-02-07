@@ -14,8 +14,26 @@ warnings.filterwarnings("ignore")
 log_config = uvicorn.config.LOGGING_CONFIG
 default_format = "%(asctime)s | %(levelname)s | %(message)s"
 access_format = r'%(asctime)s | %(levelname)s | %(client_addr)s: %(request_line)s %(status_code)s'
+default_file_handler: dict[str, str] = {
+    "formatter": "default",
+    "class": "logging.handlers.RotatingFileHandler",
+    "filename": "logs/app.log",
+    "encoding": "utf-8",
+}
+access_file_handler: dict[str, str] = {
+    "formatter": "access",
+    "class": "logging.handlers.RotatingFileHandler",
+    "filename": "logs/app.log",
+    "encoding": "utf-8",
+}
 log_config["formatters"]["default"]["fmt"] = default_format
 log_config["formatters"]["access"]["fmt"] = access_format
+log_config["formatters"]["default"]["use_colors"] = False
+log_config["formatters"]["access"]["use_colors"] = False
+log_config["handlers"]["default_file"] = default_file_handler
+log_config["handlers"]["access_file"] = access_file_handler
+log_config["loggers"]["uvicorn"]["handlers"] = ["default", "default_file"]
+log_config["loggers"]["uvicorn.access"]["handlers"] = ["access","access_file"]
 
 app = FastAPI(
     docs_url=f"/{api_prefix}/docs",    # 设置 Swagger UI 文档路径
