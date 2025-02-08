@@ -5,11 +5,9 @@ from fastapi import FastAPI, HTTPException
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
-
 from utils.configs import enable_gateway, api_prefix
 
-warnings.filterwarnings("ignore")
-
+# warnings.filterwarnings("ignore")
 
 log_config = uvicorn.config.LOGGING_CONFIG
 default_format = "%(asctime)s | %(levelname)s | %(message)s"
