@@ -2,10 +2,10 @@ import json
 from urllib.parse import quote
 
 from fastapi import Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 
 from app import app, templates
-from gateway.login import login_html
+from utils import configs
 from utils.kv_utils import set_value_for_key
 
 with open("templates/chatgpt_context.json", "r", encoding="utf-8") as f:
@@ -18,7 +18,7 @@ async def chatgpt_html(request: Request):
     if not token:
         token = request.cookies.get("token")
     if not token:
-        return await login_html(request)
+        return RedirectResponse(url=configs.login_url)
 
     if len(token) != 45 and not token.startswith("eyJhbGciOi"):
         token = quote(token)

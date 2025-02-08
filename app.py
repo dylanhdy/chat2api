@@ -58,7 +58,6 @@ import api.chat2api
 
 if enable_gateway:
     import gateway.share
-    import gateway.login
     import gateway.chatgpt
     import gateway.gpts
     import gateway.admin

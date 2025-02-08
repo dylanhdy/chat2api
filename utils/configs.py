@@ -68,6 +68,7 @@ enable_gateway = is_true(os.getenv('ENABLE_GATEWAY', False))
 auto_seed = is_true(os.getenv('AUTO_SEED', True))
 force_no_history = is_true(os.getenv('FORCE_NO_HISTORY', False))
 no_sentinel = is_true(os.getenv('NO_SENTINEL', False))
+login_url = os.getenv('LOGIN_URL', None)
 
 with open('version.txt') as f:
     version = f.read().strip()
@@ -103,4 +104,5 @@ logger.info("------------------------- Gateway --------------------------")
 logger.info("ENABLE_GATEWAY:    " + str(enable_gateway))
 logger.info("AUTO_SEED:         " + str(auto_seed))
 logger.info("FORCE_NO_HISTORY: " + str(force_no_history))
+logger.info("LOGIN_URL:         " + str(login_url))
 logger.info("-" * 60)
